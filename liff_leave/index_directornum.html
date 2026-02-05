@@ -78,7 +78,7 @@
 				})
 		}
 	   window.onload = function () {
-	   document.getElementById("t0").value= document.getElementById("t0").value+"xx"+JSON.stringify(liff);
+	   /*document.getElementById("t0").value= document.getElementById("t0").value+"xx"+JSON.stringify(liff);
 			liff
 				.init({
 					liffId: "1657228935-olmxLZrY" // Use own liffId本機測試:1657090452-WLJZvkE2
@@ -90,7 +90,7 @@
 				.catch((err) => {
 	   document.getElementById("t0").value= document.getElementById("t0").value+"初始化失敗";
 				　console.log('初始化失敗')
-				});
+				});*/
 			
 			$('#sure').click(function (e) {  //按下確定鈕
 				pushMsg($('#name').val(), $('#startdate1').val(), $('#startdate2').val(), $('#startdate3').val(), $('#startdate4').val(), $('#startdate5').val());
@@ -108,7 +108,7 @@
 	</script>
 </head>
 <body>
-<textarea id="t0"></textarea>
+<!--<textarea id="t0"></textarea>--!>
     <div class="row" style="margin: 10px">
         <div class="col-12" style="margin: 10px">
             <label id="Chinese_num">請假員工編號</label>

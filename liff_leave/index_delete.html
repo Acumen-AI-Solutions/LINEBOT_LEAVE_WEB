@@ -110,7 +110,7 @@
 		   }*/
 		}
 	   window.onload = function () {
-	   document.getElementById("t0").value= document.getElementById("t0").value+"xx"+JSON.stringify(liff);
+	   /*document.getElementById("t0").value= document.getElementById("t0").value+"xx"+JSON.stringify(liff);
 			liff
 				.init({
 					liffId: "1657228935-7GmaXPrV" // Use own liffId本機測試:1657090452-Elx6zrZe
@@ -122,7 +122,7 @@
 				.catch((err) => {
 	   document.getElementById("t0").value= document.getElementById("t0").value+"初始化失敗";
 				　console.log('初始化失敗')
-				});
+				});*/
 			
 			$('#sure').click(function (e) {  //按下確定鈕
 				pushMsg($('#name').val(), $('#leave').val(), $('#startdate').val(), $('#enddate').val());
@@ -143,7 +143,7 @@
 	</script>
 </head>
 <body>
-<textarea id="t0"></textarea>
+<!--<textarea id="t0"></textarea>--!>
     <div class="row" style="margin: 10px">
         <div class="col-12" style="margin: 10px">
             <label id="language_change">選擇語系</label>
