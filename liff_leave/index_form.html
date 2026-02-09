@@ -87,9 +87,31 @@
 				return;
 			}
 			
-			// 檢查結束時間不能超過起始時間
+			// 檢查並調整結束時間
 			var endHour = Number(Aryendtime[0]);
 			var endMinute = Number(Aryendtime[1]);
+			
+			// 如果時間在0:00-8:00之間（不包括8:00），自動調整為8:00
+			if (endHour < 8) {
+				pendtime = '08:00';
+				Aryendtime = ['08', '00'];
+				endHour = 8;
+				endMinute = 0;
+			}
+			// 如果時間在17:00-23:59之間（不包括17:00），自動調整為17:00
+			else if (endHour > 17 || (endHour == 17 && endMinute > 0)) {
+				pendtime = '17:00';
+				Aryendtime = ['17', '00'];
+				endHour = 17;
+				endMinute = 0;
+			}
+			// 檢查結束分鐘是否為0或30
+			else if (endMinute != 0 && endMinute != 30){
+				alert('結束分鐘只能選擇0或30！');
+				return;
+			}
+			
+			// 檢查結束時間不能超過起始時間
 			var startTimeMinutes = startHour * 60 + startMinute;
 			var endTimeMinutes = endHour * 60 + endMinute;
 			
@@ -211,25 +233,59 @@
 				}
 			});
 			
-			// 檢查結束時間不能超過起始時間
+			// 限制結束時間只能選擇0或30分鐘，並自動調整範圍外的時間
 			$('#endtime').on('change', function() {
-				var endTimeValue = $(this).val();
-				var startTimeValue = $('#starttime').val();
-				
-				if (endTimeValue && startTimeValue) {
-					var startTimeParts = startTimeValue.split(':');
-					var endTimeParts = endTimeValue.split(':');
-					var startHour = parseInt(startTimeParts[0]);
-					var startMinute = parseInt(startTimeParts[1]);
-					var endHour = parseInt(endTimeParts[0]);
-					var endMinute = parseInt(endTimeParts[1]);
+				var timeValue = $(this).val();
+				if (timeValue) {
+					var timeParts = timeValue.split(':');
+					var hour = parseInt(timeParts[0]);
+					var minute = parseInt(timeParts[1]);
+					var adjustedTime = '';
+					var needAlert = false;
 					
-					var startTimeMinutes = startHour * 60 + startMinute;
-					var endTimeMinutes = endHour * 60 + endMinute;
+					// 如果時間在0:00-8:00之間（不包括8:00），自動調整為8:00
+					if (hour < 8) {
+						adjustedTime = '08:00';
+						$(this).val(adjustedTime);
+						needAlert = true;
+					}
+					// 如果時間在17:00-23:59之間（不包括17:00），自動調整為17:00
+					else if (hour > 17 || (hour == 17 && minute > 0)) {
+						adjustedTime = '17:00';
+						$(this).val(adjustedTime);
+						needAlert = true;
+					}
+					// 檢查分鐘是否為0或30，如果不是則自動調整
+					else if (minute != 0 && minute != 30) {
+						// 如果分鐘小於30，設為0；否則設為30
+						var adjustedMinute = minute < 30 ? 0 : 30;
+						adjustedTime = (hour < 10 ? '0' : '') + hour + ':' + (adjustedMinute < 10 ? '0' : '') + adjustedMinute;
+						$(this).val(adjustedTime);
+						needAlert = true;
+					}
 					
-					if (endTimeMinutes <= startTimeMinutes) {
-						alert('結束時間不能小於或等於起始時間！');
-						$(this).val('');
+					if (needAlert && adjustedTime) {
+						alert('結束時間已自動調整為 ' + adjustedTime);
+					}
+					
+					// 檢查結束時間不能超過起始時間
+					var startTimeValue = $('#starttime').val();
+					if (startTimeValue) {
+						var startTimeParts = startTimeValue.split(':');
+						var startHour = parseInt(startTimeParts[0]);
+						var startMinute = parseInt(startTimeParts[1]);
+						var finalEndTime = adjustedTime || timeValue;
+						var finalEndParts = finalEndTime.split(':');
+						var finalEndHour = parseInt(finalEndParts[0]);
+						var finalEndMinute = parseInt(finalEndParts[1]);
+						
+						var startTimeMinutes = startHour * 60 + startMinute;
+						var endTimeMinutes = finalEndHour * 60 + finalEndMinute;
+						
+						if (endTimeMinutes <= startTimeMinutes) {
+							alert('結束時間不能小於或等於起始時間！請重新選擇結束時間。');
+							$(this).val('');
+						}
 					}
 				}
 			});
@@ -353,10 +409,10 @@
             <div style="display: flex; align-items: center; gap: 5px;">
                 <input type="time" id="starttime" value="" class="form-control" step="1800" min="00:00" max="23:59" />
                 <label id="test">~</label>
-                <input type="time" id="endtime" value="" class="form-control" />
+                <input type="time" id="endtime" value="" class="form-control"  step="1800" min="00:00" max="23:59" />
             </div>
-            <small id="Chinese_time_hint" style="color: #666;">起始時間僅能選擇整點或30分（0:00-8:00自動調整為8:00，17:00-23:59自動調整為17:00）</small>
-            <small id="vietnamese_time_hint" style="color: #666; display: none;">Thời gian bắt đầu chỉ có thể chọn giờ hoặc 30 phút (0:00-8:00 tự động điều chỉnh thành 8:00, 17:00-23:59 tự động điều chỉnh thành 17:00)</small>
+            <small id="Chinese_time_hint" style="color: #666;">起始與結束時間僅能選擇整點或30分（0:00-8:00自動調整為8:00，17:00-23:59自動調整為17:00）</small>
+            <small id="vietnamese_time_hint" style="color: #666; display: none;">Thời gian bắt đầu và kết thúc chỉ có thể chọn giờ hoặc 30 phút (0:00-8:00 tự động điều chỉnh thành 8:00, 17:00-23:59 tự động điều chỉnh thành 17:00)</small>
 	  <br />
             <button class="btn btn-success btn-block" id="sure">確定</button>
 	  <button class="btn btn-success btn-block" id="sure_vietnamese">Chắc chắn rồi</button>
