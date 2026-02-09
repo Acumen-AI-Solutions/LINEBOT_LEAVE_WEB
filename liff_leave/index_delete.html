@@ -56,6 +56,8 @@
 			msg = msg + Aryenddate[0] + "/";
 			msg = msg + Aryenddate[1] + "/";
 			msg = msg + Aryenddate[2];
+			
+			// 確保 LIFF 已初始化後再發送訊息
 			liff.sendMessages([  //推播訊息
 				{
 					type: "text",
@@ -64,6 +66,10 @@
 			])
 				.then(() => {
 					liff.closeWindow();  //關閉視窗
+				})
+				.catch((err) => {
+					console.error('發送訊息失敗:', err);
+					alert('發送訊息失敗，請稍後再試');
 				})
 			/*if (Arystartdate[0] > Aryenddate[0]){
 				alert('起始年份不能大於結束年份！');
@@ -110,19 +116,19 @@
 		   }*/
 		}
 	   window.onload = function () {
-	   /*document.getElementById("t0").value= document.getElementById("t0").value+"xx"+JSON.stringify(liff);
+	   /*document.getElementById("t0").value= document.getElementById("t0").value+"xx"+JSON.stringify(liff);*/
 			liff
 				.init({
 					liffId: "1657228935-7GmaXPrV" // Use own liffId本機測試:1657090452-Elx6zrZe
 				})
 				.then(() => {
-	   document.getElementById("t0").value= document.getElementById("t0").value+"初始化成功";
+	   /*document.getElementById("t0").value= document.getElementById("t0").value+"初始化成功";*/
 				　console.log('初始化成功')
 				})
 				.catch((err) => {
-	   document.getElementById("t0").value= document.getElementById("t0").value+"初始化失敗";
+	   /*document.getElementById("t0").value= document.getElementById("t0").value+"初始化失敗";*/
 				　console.log('初始化失敗')
-				});*/
+				});
 			
 			$('#sure').click(function (e) {  //按下確定鈕
 				pushMsg($('#name').val(), $('#leave').val(), $('#startdate').val(), $('#enddate').val());
