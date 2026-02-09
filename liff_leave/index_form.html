@@ -62,7 +62,20 @@
 			if (SEmouth > 1){
 				alert('月份錯誤,不可小於現在月份安排請假！');
 				return;			
-			}/*else if (Arystartdate[2] > Aryenddate[2]){
+			}
+			// 檢查起始小時是否在8-17之間
+			var startHour = Number(Arystarttime[0]);
+			if (startHour < 8 || startHour > 17){
+				alert('起始小時必須在8點到17點之間！');
+				return;
+			}
+			// 檢查起始分鐘是否為0或30
+			var startMinute = Number(Arystarttime[1]);
+			if (startMinute != 0 && startMinute != 30){
+				alert('起始分鐘只能選擇0或30！');
+				return;
+			}
+			/*else if (Arystartdate[2] > Aryenddate[2]){
 				alert('起始日期不能大於結束日期！');
 				return;					
 			}*/else if (Arystarttime[0] > Aryendtime[0]){
@@ -104,19 +117,45 @@
 			
 		}
 	   window.onload = function () {
-	   <!--document.getElementById("t0").value= document.getElementById("t0").value+"xx"+JSON.stringify(liff);-->
+	   /*document.getElementById("t0").value= document.getElementById("t0").value+"xx"+JSON.stringify(liff);*/
 			liff
 				.init({
 					liffId: "1657228935-j5KEvbzV" // Use own liffId本機測試:1657090452-yZxrKlp2
 				})
 				.then(() => {
-	   <!--document.getElementById("t0").value= document.getElementById("t0").value+"初始化成功";-->
+	   /*document.getElementById("t0").value= document.getElementById("t0").value+"初始化成功";*/
 				　console.log('初始化成功')
 				})
 				.catch((err) => {
-	   <!--document.getElementById("t0").value= document.getElementById("t0").value+"初始化失敗";->
+	   /*document.getElementById("t0").value= document.getElementById("t0").value+"初始化失敗";*/
 				　console.log('初始化失敗')
 				});
+			
+			// 限制起始時間只能選擇0或30分鐘
+			$('#starttime').on('change', function() {
+				var timeValue = $(this).val();
+				if (timeValue) {
+					var timeParts = timeValue.split(':');
+					var hour = parseInt(timeParts[0]);
+					var minute = parseInt(timeParts[1]);
+					
+					// 檢查小時是否在8-17之間
+					if (hour < 8 || hour > 17) {
+						alert('起始小時必須在8點到17點之間！');
+						$(this).val('');
+						return;
+					}
+					
+					// 檢查分鐘是否為0或30，如果不是則自動調整
+					if (minute != 0 && minute != 30) {
+						// 如果分鐘小於30，設為0；否則設為30
+						var adjustedMinute = minute < 30 ? 0 : 30;
+						var adjustedTime = (hour < 10 ? '0' : '') + hour + ':' + (adjustedMinute < 10 ? '0' : '') + adjustedMinute;
+						$(this).val(adjustedTime);
+						alert('起始分鐘只能選擇0或30，已自動調整為 ' + adjustedTime);
+					}
+				}
+			});
 			
 			$('#sure').click(function (e) {  //按下確定鈕
 				pushMsg($('#name').val(), $('#leave').val(), $('#startdate').val(), $('#enddate').val(), $('#starttime').val(), $('#endtime').val());
@@ -160,7 +199,7 @@
             <select id="leave" class="form-control">
                 <option selected>事假</option>
 				<option>病假</option>
-				<option>特別休假</option>
+				<!--<option>特別休假</option>-->
 				<option>無薪公假</option>
 				<option>家庭照護假</option>
 				<option>婚假</option>
@@ -194,7 +233,7 @@
 	  <select id="leave_vietnamese" class="form-control">
 			<option value="事假">Nghỉ phép cá nhân</option>
 			<option value="病假">Nghỉ ốm</option>
-			<option value="特別休假">Nghỉ phép đặc biệt</option>
+			<!--<option value="特別休假">Nghỉ phép đặc biệt</option>-->
 			<option value="無薪公假">Nghỉ công tác không hưởng lương</option>
 			<option value="家庭照護假">Nghỉ chăm sóc gia đình</option>
 			<option value="婚假">Nghỉ cưới</option>
@@ -234,9 +273,13 @@
             <br />
 	  <label id="Chinese_time">時間</label>
 	  <label id="vietnamese_time">Thời gian</label>
-            <input type="time" id="starttime" value="" class="form-control" />
-            <label id="test">~</label>
-	  <input type="time" id="endtime" value="" class="form-control" />
+            <div style="display: flex; align-items: center; gap: 5px;">
+                <input type="time" id="starttime" value="" class="form-control" step="1800" min="08:00" max="17:30" />
+                <label id="test">~</label>
+                <input type="time" id="endtime" value="" class="form-control" />
+            </div>
+            <small id="Chinese_time_hint" style="color: #666;">起始時間僅能選擇整點或30分（8:00-17:30）</small>
+            <small id="vietnamese_time_hint" style="color: #666; display: none;">Thời gian bắt đầu chỉ có thể chọn giờ hoặc 30 phút (8:00-17:30)</small>
 	  <br />
             <button class="btn btn-success btn-block" id="sure">確定</button>
 	  <button class="btn btn-success btn-block" id="sure_vietnamese">Chắc chắn rồi</button>

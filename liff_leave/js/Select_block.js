@@ -20,6 +20,8 @@ const sure_vietnameseB = document.getElementById('sure_vietnamese');
 const starttime1 = document.getElementById('starttime');
 const test1 = document.getElementById('test');
 const endtime1 = document.getElementById('endtime');
+const Chinese_time_hintA = document.getElementById('Chinese_time_hint');
+const vietnamese_time_hintB = document.getElementById('vietnamese_time_hint');
 
 mySelect.addEventListener('change', (e) => {
   switch (e.target.value) {
@@ -31,6 +33,7 @@ mySelect.addEventListener('change', (e) => {
 	  leaveA.style.display = 'block';
 	  Chinese_dateA.style.display = 'block';
 	  Chinese_timeA.style.display = 'block';
+	  Chinese_time_hintA.style.display = 'block';
 	  sureA.style.display = 'block';
 	  language_vietnameseB.style.display = 'none';
 	  vietnamese_numB.style.display = 'none';
@@ -39,6 +42,7 @@ mySelect.addEventListener('change', (e) => {
 	  leave_vietnameseB.style.display = 'none';
 	  vietnamese_dateB.style.display = 'none';
 	  vietnamese_timeB.style.display = 'none';
+	  vietnamese_time_hintB.style.display = 'none';
 	  sure_vietnameseB.style.display = 'none';
 	  break;
 	}
@@ -50,6 +54,7 @@ mySelect.addEventListener('change', (e) => {
 	  leaveA.style.display = 'none';
 	  Chinese_dateA.style.display = 'none';
 	  Chinese_timeA.style.display = 'none';
+	  Chinese_time_hintA.style.display = 'none';
 	  sureA.style.display = 'none';
 	  language_vietnameseB.style.display = 'block';
 	  vietnamese_numB.style.display = 'block';
@@ -58,6 +63,7 @@ mySelect.addEventListener('change', (e) => {
 	  leave_vietnameseB.style.display = 'block';
 	  vietnamese_dateB.style.display = 'block';
 	  vietnamese_timeB.style.display = 'block';
+	  vietnamese_time_hintB.style.display = 'block';
 	  sure_vietnameseB.style.display = 'block';
 	  break;
 	}
@@ -75,6 +81,7 @@ leaveA.addEventListener('change', (e) => {
 		test1.style.display = 'none';
 		endtime1.style.display = 'none';
 		Chinese_timeA.style.display = 'none';
+		Chinese_time_hintA.style.display = 'none';
 	  break;
 	}
 	case '婚假': {
@@ -82,6 +89,7 @@ leaveA.addEventListener('change', (e) => {
 		test1.style.display = 'none';
 		endtime1.style.display = 'none';
 		Chinese_timeA.style.display = 'none';
+		Chinese_time_hintA.style.display = 'none';
 	  break;
 	}
 	case '喪假(父母、養父母、繼父母、配偶喪亡者)': {
@@ -89,6 +97,7 @@ leaveA.addEventListener('change', (e) => {
 		test1.style.display = 'none';
 		endtime1.style.display = 'none';
 		Chinese_timeA.style.display = 'none';
+		Chinese_time_hintA.style.display = 'none';
 	  break;
 	}
 	case '喪假(祖父母、子女、配偶之父母、配偶之養父母或繼父母喪亡者)': {
@@ -96,6 +105,7 @@ leaveA.addEventListener('change', (e) => {
 		test1.style.display = 'none';
 		endtime1.style.display = 'none';
 		Chinese_timeA.style.display = 'none';
+		Chinese_time_hintA.style.display = 'none';
 	  break;
 	}
 	case '喪假(曾祖父母、兄弟姊妹、配偶之祖父母喪亡者)': {
@@ -103,6 +113,7 @@ leaveA.addEventListener('change', (e) => {
 		test1.style.display = 'none';
 		endtime1.style.display = 'none';
 		Chinese_timeA.style.display = 'none';
+		Chinese_time_hintA.style.display = 'none';
 	  break;
 	}
 	case '陪產假': {
@@ -110,6 +121,7 @@ leaveA.addEventListener('change', (e) => {
 		test1.style.display = 'block';
 		endtime1.style.display = 'block';
 		Chinese_timeA.style.display = 'block';
+		Chinese_time_hintA.style.display = 'block';
 	  break;
 	}
 	case '分娩假': {
@@ -117,6 +129,7 @@ leaveA.addEventListener('change', (e) => {
 		test1.style.display = 'none';
 		endtime1.style.display = 'none';
 		Chinese_timeA.style.display = 'none';
+		Chinese_time_hintA.style.display = 'none';
 	  break;
 	}
 	case '產檢假': {
@@ -124,6 +137,7 @@ leaveA.addEventListener('change', (e) => {
 		test1.style.display = 'none';
 		endtime1.style.display = 'none';
 		Chinese_timeA.style.display = 'none';
+		Chinese_time_hintA.style.display = 'none';
 	  break;
 	}	
 	default: {
@@ -131,6 +145,7 @@ leaveA.addEventListener('change', (e) => {
 		test1.style.display = 'block';
 		endtime1.style.display = 'block';
 		Chinese_timeA.style.display = 'block';
+		Chinese_time_hintA.style.display = 'block';
 	  break;
 	}  
   }
@@ -142,6 +157,7 @@ leave_vietnameseB.addEventListener('change', (e) => {
 		test1.style.display = 'none';
 		endtime1.style.display = 'none';
 		vietnamese_timeB.style.display = 'none';
+		vietnamese_time_hintB.style.display = 'none';
 	  break;
 	}
 	case '婚假': {
@@ -149,6 +165,7 @@ leave_vietnameseB.addEventListener('change', (e) => {
 		test1.style.display = 'none';
 		endtime1.style.display = 'none';
 		vietnamese_timeB.style.display = 'none';
+		vietnamese_time_hintB.style.display = 'none';
 	  break;
 	}
 	case '喪假(父母、養父母、繼父母、配偶喪亡者)': {
@@ -156,6 +173,7 @@ leave_vietnameseB.addEventListener('change', (e) => {
 		test1.style.display = 'none';
 		endtime1.style.display = 'none';
 		vietnamese_timeB.style.display = 'none';
+		vietnamese_time_hintB.style.display = 'none';
 	  break;
 	}
 	case '喪假(祖父母、子女、配偶之父母、配偶之養父母或繼父母喪亡者)': {
@@ -163,6 +181,7 @@ leave_vietnameseB.addEventListener('change', (e) => {
 		test1.style.display = 'none';
 		endtime1.style.display = 'none';
 		vietnamese_timeB.style.display = 'none';
+		vietnamese_time_hintB.style.display = 'none';
 	  break;
 	}
 	case '喪假(曾祖父母、兄弟姊妹、配偶之祖父母喪亡者)': {
@@ -170,6 +189,7 @@ leave_vietnameseB.addEventListener('change', (e) => {
 		test1.style.display = 'none';
 		endtime1.style.display = 'none';
 		vietnamese_timeB.style.display = 'none';
+		vietnamese_time_hintB.style.display = 'none';
 	  break;
 	}
 	case '陪產假': {
@@ -177,6 +197,7 @@ leave_vietnameseB.addEventListener('change', (e) => {
 		test1.style.display = 'block';
 		endtime1.style.display = 'block';
 		vietnamese_timeB.style.display = 'block';
+		vietnamese_time_hintB.style.display = 'block';
 	  break;
 	}
 	case '分娩假': {
@@ -184,6 +205,7 @@ leave_vietnameseB.addEventListener('change', (e) => {
 		test1.style.display = 'none';
 		endtime1.style.display = 'none';
 		vietnamese_timeB.style.display = 'none';
+		vietnamese_time_hintB.style.display = 'none';
 	  break;
 	}
 	case '產檢假': {
@@ -191,6 +213,7 @@ leave_vietnameseB.addEventListener('change', (e) => {
 		test1.style.display = 'none';
 		endtime1.style.display = 'none';
 		vietnamese_timeB.style.display = 'none';
+		vietnamese_time_hintB.style.display = 'none';
 	  break;
 	}	
 	default: {
@@ -198,6 +221,7 @@ leave_vietnameseB.addEventListener('change', (e) => {
 		test1.style.display = 'block';
 		endtime1.style.display = 'block';
 		vietnamese_timeB.style.display = 'block';
+		vietnamese_time_hintB.style.display = 'block';
 	  break;
 	}  
   }
