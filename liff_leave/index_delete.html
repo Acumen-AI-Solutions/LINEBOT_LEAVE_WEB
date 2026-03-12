@@ -56,8 +56,6 @@
 			msg = msg + Aryenddate[0] + "/";
 			msg = msg + Aryenddate[1] + "/";
 			msg = msg + Aryenddate[2];
-			
-			// 確保 LIFF 已初始化後再發送訊息
 			liff.sendMessages([  //推播訊息
 				{
 					type: "text",
@@ -66,10 +64,6 @@
 			])
 				.then(() => {
 					liff.closeWindow();  //關閉視窗
-				})
-				.catch((err) => {
-					console.error('發送訊息失敗:', err);
-					alert('發送訊息失敗，請稍後再試');
 				})
 			/*if (Arystartdate[0] > Aryenddate[0]){
 				alert('起始年份不能大於結束年份！');
@@ -173,7 +167,7 @@
 				<option selected>事假</option>
 				<option>病假</option>
 				<option>特別休假</option>
-				<option>無薪公假</option>
+				<!--<option>無薪公假</option>-->
 				<option>家庭照護假</option>
 				<option>婚假</option>
 				<option>公傷假</option>
@@ -198,7 +192,7 @@
 				<option>謀職假</option>
 				<option>天然災害假</option>
 				<option>無薪假</option>
-				<option>無薪公假</option>
+				<!--<option>無薪公假</option>-->
 				<option>原住民祭儀假</option>
 				<option>公假(點召)</option>
 	      <!--<option>防疫病假</option>-->
@@ -207,7 +201,7 @@
 			<option value="事假">Nghỉ phép cá nhân</option>
 			<option value="病假">Nghỉ ốm</option>
 			<option value="特別休假">Nghỉ phép đặc biệt</option>
-			<option value="無薪公假">Nghỉ công tác không hưởng lương</option>
+			<!--<option value="無薪公假">Nghỉ công tác không hưởng lương</option>-->
 			<option value="家庭照護假">Nghỉ chăm sóc gia đình</option>
 			<option value="婚假">Nghỉ cưới</option>
 			<option value="公傷假">Nghỉ chấn thương công cộng</option>
@@ -232,7 +226,7 @@
 			<option value="謀職假">Xin nghỉ phép chuyên nghiệp</option>
 			<option value="天然災害假">Nghỉ phép do thiên tai</option>
 			<option value="無薪假">Nghỉ không lương</option>
-			<option value="無薪公假">Nghỉ công tác không hưởng lương</option>
+			<!--<option value="無薪公假">Nghỉ công tác không hưởng lương</option>-->
 			<option value="原住民祭儀假">Nghỉ phép theo nghi lễ của thổ dân</option>
 			<option value="公假(點召)">Ngày lễ (theo yêu cầu)</option>
 <!--<option value="防疫病假">Nghỉ phòng dịch </option>-->

@@ -51,17 +51,17 @@
 				pstarttime='08:00';
 				pendtime='17:00';
 			}
+			// 收集所有錯誤訊息
+			var errorMessages = [];
+			
 			if (pname == '' || pstartdate == '' || penddate == '' || pstarttime == '' || pendtime == '') {  //資料檢查
-				alert('每個項目都必須輸入！');
-				return;
+				errorMessages.push('每個項目都必須輸入！');
 			}
 			if (Arystartdate[0] > Aryenddate[0]){
-				alert('起始年份不能大於結束年份！');
-				return;				
+				errorMessages.push('起始年份不能大於結束年份！');
 			}
 			if (SEmouth > 1){
-				alert('月份錯誤,不可小於現在月份安排請假！');
-				return;			
+				errorMessages.push('月份錯誤,不可小於現在月份安排請假！');
 			}
 			// 檢查並調整起始時間
 			var startHour = Number(Arystarttime[0]);
@@ -83,8 +83,7 @@
 			}
 			// 檢查起始分鐘是否為0或30
 			else if (startMinute != 0 && startMinute != 30){
-				alert('起始分鐘只能選擇0或30！');
-				return;
+				errorMessages.push('起始分鐘只能選擇0或30！');
 			}
 			
 			// 檢查並調整結束時間
@@ -107,8 +106,7 @@
 			}
 			// 檢查結束分鐘是否為0或30
 			else if (endMinute != 0 && endMinute != 30){
-				alert('結束分鐘只能選擇0或30！');
-				return;
+				errorMessages.push('結束分鐘只能選擇0或30！');
 			}
 			
 			// 檢查結束時間不能超過起始時間
@@ -116,22 +114,24 @@
 			var endTimeMinutes = endHour * 60 + endMinute;
 			
 			if (endTimeMinutes <= startTimeMinutes) {
-				alert('結束時間不能小於或等於起始時間！');
-				return;
+				errorMessages.push('結束時間不能小於或等於起始時間！');
 			}
 			
 			/*else if (Arystartdate[2] > Aryenddate[2]){
-				alert('起始日期不能大於結束日期！');
-				return;					
+				errorMessages.push('起始日期不能大於結束日期！');
 			}*/else if (Arystarttime[0] > Aryendtime[0]){
-				alert('起始時間不能大於結束時間！');
-				return;					
+				errorMessages.push('起始時間不能大於結束時間！');
 			/*}else if (Arystarttime[1] > Aryendtime[1]){
-				alert('起始時間不能大於結束時間！');
-				return;	*/				
+				errorMessages.push('起始時間不能大於結束時間！');
+			*/				
 			}else if (pleave == '生理假' && SEday > 1 || SEmouth > 1){
-				alert('生理假一個月不可請超過一天！');
-				return;			
+				errorMessages.push('生理假一個月不可請超過一天！');
+			}
+			
+			// 如果有錯誤，只顯示最後一個錯誤
+			if (errorMessages.length > 0) {
+				alert(errorMessages[errorMessages.length - 1]);
+				return;
 			}/*else if(NowYear != Number(Arystartdate[0]) ){
 				alert('年份錯誤,不可跨年安排請假！');
 				return;						
@@ -333,7 +333,7 @@
                 <option selected>事假</option>
 				<option>病假</option>
 				<!--<option>特別休假</option>-->
-				<option>無薪公假</option>
+				<!--<option>無薪公假</option>-->
 				<option>家庭照護假</option>
 				<option>婚假</option>
 				<option>公傷假</option>
@@ -358,7 +358,7 @@
 				<option>謀職假</option>
 				<option>天然災害假</option>
 				<option>無薪假</option>
-				<option>無薪公假</option>
+				<!--<option>無薪公假</option>-->
 				<option>原住民祭儀假</option>
 				<option>公假(點召)</option>
 	      <!--<option>防疫病假</option>-->
@@ -367,7 +367,7 @@
 			<option value="事假">Nghỉ phép cá nhân</option>
 			<option value="病假">Nghỉ ốm</option>
 			<!--<option value="特別休假">Nghỉ phép đặc biệt</option>-->
-			<option value="無薪公假">Nghỉ công tác không hưởng lương</option>
+			<!--<option value="無薪公假">Nghỉ công tác không hưởng lương</option>-->
 			<option value="家庭照護假">Nghỉ chăm sóc gia đình</option>
 			<option value="婚假">Nghỉ cưới</option>
 			<option value="公傷假">Nghỉ chấn thương công cộng</option>
@@ -392,7 +392,7 @@
 			<option value="謀職假">Xin nghỉ phép chuyên nghiệp</option>
 			<option value="天然災害假">Nghỉ phép do thiên tai</option>
 			<option value="無薪假">Nghỉ không lương</option>
-			<option value="無薪公假">Nghỉ công tác không hưởng lương</option>
+			<!--<option value="無薪公假">Nghỉ công tác không hưởng lương</option>-->
 			<option value="原住民祭儀假">Nghỉ phép theo nghi lễ của thổ dân</option>
 			<option value="公假(點召)">Ngày lễ (theo yêu cầu)</option>
 	      <!--<option value="防疫病假">Nghỉ phòng dịch </option>-->
